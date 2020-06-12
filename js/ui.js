@@ -75,17 +75,20 @@ class UI {
     }
 
     displayIngredientAndMeasureTemplate(drink){
-        // drink has array: [ {strIngredient1, strMeasure1}, {strIng2, strMeas2}....] 
+        // drink has array of 15 ingr-measure pairs: [ {ingredient : drink[strIngredient1], measure: drink[strMeasure1]}, {...}] 
         let objectsArray = [];
-        //there is 15 objects in array
-        for(let i = 1; i <=15; i++){
-            const imObject = {};
-            const strIng = 'strIngredient'+i;
-            const strMeas = 'strMeasure'+i;
-            imObject.ingredient = drink[strIng];
-            imObject.measure = drink[strMeas]; //filled object
-            if(imObject.ingredient !== '')
-            objectsArray.push(imObject);
+       
+        for(let i = 1; i <= 15; i++){
+            const ingredientAndMeasure = {};
+
+            // Are there values in object {ingredient: 5, mesure: 6}  ?
+            if( drink[`strIngredient${i}`] !== null) {
+                console.log(drink[`strIngredient${i}`]);
+                //fill the object
+                ingredientAndMeasure.ingredient = drink[`strIngredient${i}`];
+                ingredientAndMeasure.measure = drink[`strMeasure${i}`];
+                objectsArray.push(ingredientAndMeasure);
+            }
         }
         
         let template = ``;
