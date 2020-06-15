@@ -1,11 +1,8 @@
-//  CLASS methods related to html inner project
-// for removing favorite drink from LS we need a cocktailDB instance
 class UI {
-    //display the cocktails without ingredients
+    
     displayTemplate(drinks) {
         const mainDiv = document.querySelector('.results-wrapper');
         mainDiv.style.display = 'block';
-
         const resultsRow = document.querySelector('#results');        
 
         drinks.forEach(drink => {
@@ -37,8 +34,7 @@ class UI {
                         </div>
                     </div>
                 </div>
-            </div>
-             `; 
+            </div>`; 
 
            this.isFavorite(drink.idDrink);
         });   
@@ -47,44 +43,39 @@ class UI {
     displayTemplateIng(drinks) {
         const mainDiv = document.querySelector('.results-wrapper');
         mainDiv.style.display = 'block';
-
         const resultsRow = document.querySelector('#results');
 
         drinks.forEach(drink => {
 
-        resultsRow.innerHTML += ` 
-            <div class="col-md-4">
-                <div class="card my-3">
-                    <button type="button" data-id="${drink.idDrink}" class="favorite-btn btn btn-outline-info">
-                    +
-                    </button>
-                    <img class="card-img-top" src="${drink.strDrinkThumb}">
-                    <div class="card-body">
-                        <div class="card-text text-center">
-                        <h4 class="card-title text-center">${drink.strDrink}</h4>
-                        <a data-target="#recipe" href="#" data-toggle="modal" data-id="${drink.idDrink}" class="btn btn-success btn-recipe">Get Details</a>
+            resultsRow.innerHTML += ` 
+                <div class="col-md-4">
+                    <div class="card my-3">
+                        <button type="button" data-id="${drink.idDrink}" class="favorite-btn btn btn-outline-info">
+                        +
+                        </button>
+                        <img class="card-img-top" src="${drink.strDrinkThumb}">
+                        <div class="card-body">
+                            <div class="card-text text-center">
+                            <h4 class="card-title text-center">${drink.strDrink}</h4>
+                            <a data-target="#recipe" href="#" data-toggle="modal" data-id="${drink.idDrink}" class="btn btn-success btn-recipe">Get Details</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        `;
+                </div>`;
         
         });
-        //check is {drink.idDrink} = id in LocalStorage
+       
         this.isFavorite();
     }
 
     displayIngredientAndMeasureTemplate(drink){
-        // drink has array of 15 ingr-measure pairs: [ {ingredient : drink[strIngredient1], measure: drink[strMeasure1]}, {...}] 
         let objectsArray = [];
        
         for(let i = 1; i <= 15; i++){
             const ingredientAndMeasure = {};
 
-            // Are there values in object {ingredient: 5, mesure: 6}  ?
             if( drink[`strIngredient${i}`] !== null) {
                 console.log(drink[`strIngredient${i}`]);
-                //fill the object
                 ingredientAndMeasure.ingredient = drink[`strIngredient${i}`];
                 ingredientAndMeasure.measure = drink[`strMeasure${i}`];
                 objectsArray.push(ingredientAndMeasure);
@@ -100,13 +91,10 @@ class UI {
         return template;
     }
 
-    //In class => 'function' keyword DONT GO !!!!!!!!
     printMessage(message, className) {
-        //print alert message div in front of .jumbotron h1
         const parentElement = document.querySelector('.jumbotron');
         const childElement = document.querySelector('.jumbotron h1');
 
-        //alert div
         var alertContainer = document.createElement("div");
         alertContainer.innerHTML = `
             <div class='alert alert-${className} alert-dismissable'>
@@ -129,26 +117,21 @@ class UI {
         }
     }
 
-    //display details on bootstrap modal plugin
     displayModalDetails(details) {
-        
-        //fill h2 with drink name, #description-text with cocktail details
         const modalTitle = document.querySelector('.modal-title'),
-              modalDescription = document.querySelector('.modal-body .description-text'),
-              ingredientList = document.querySelector('.modal-body .ingredient-list .list-group');
+            modalDescription = document.querySelector('.modal-body .description-text'),
+            ingredientList = document.querySelector('.modal-body .ingredient-list .list-group');
         
         modalTitle.innerHTML = details['strDrink'];
         modalDescription.innerHTML = details['strInstructions'];
         ingredientList.innerHTML = this.displayIngredientAndMeasureTemplate(details);
     }
 
-    //search category : Orginary_Drink
     displayCategories(categories){
         const categorySelect = document.querySelector('.search-category');
 
         let template = `<option>-SELECT-</option>`;
         categories.forEach( category => {
-                //array of strings join to one big string with "_" between words
                 category.strCategory = category.strCategory.split(" ").join("_");
 
                template += `
@@ -157,13 +140,10 @@ class UI {
         categorySelect.innerHTML = template;
     }
 
-    // first get coctails from LS, then foreach cocktail checks does exist bnt with [data-id]=coctail.id.!!!!
     isFavorite() {
-        //get all cocktails from ls
         const coctails = cocktailDB.getCoctailsFromLS();
         
         coctails.forEach( elem => {
-           //is there button where data-id=elem.id
             let favBtn = document.querySelector(`[data-id="${elem.id}"]`);
             
             if(favBtn !== null ){
@@ -175,7 +155,6 @@ class UI {
     }
 
     displayFavorites(coctails) {
-        
         const favoritesElement = document.querySelector('#favorites > tbody');
         let template = '';
         
@@ -203,9 +182,7 @@ class UI {
         favoritesElement.innerHTML = template;
     }
 
-    //remove dom element
     removeDOMelement(elem){
         elem.remove();
     }
 }
-
