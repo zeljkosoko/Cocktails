@@ -1,9 +1,13 @@
+import { UI } from "./ui.js";
+import { CoctailAPI } from "./cocktailAPI.js";
+import { CoctailDB } from "./cocktailDB.js";
+
 const ui = new UI(), cocktailAPI = new CoctailAPI(), cocktailDB = new CoctailDB();
 
 function eventListeners() {
     document.addEventListener('DOMContentLoaded', documentLoad);
 
-    const  searchForm = document.querySelector('#search-form');
+    const searchForm = document.querySelector('#search-form');
     
     if(searchForm)
     searchForm.addEventListener('submit', getCocktails);

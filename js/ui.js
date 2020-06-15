@@ -1,4 +1,7 @@
-class UI {
+import { CoctailDB } from "./cocktailDB.js";
+const cocktailDB = new CoctailDB();
+
+export class UI {
     
     displayTemplate(drinks) {
         const mainDiv = document.querySelector('.results-wrapper');
@@ -73,9 +76,7 @@ class UI {
        
         for(let i = 1; i <= 15; i++){
             const ingredientAndMeasure = {};
-
             if( drink[`strIngredient${i}`] !== null) {
-                console.log(drink[`strIngredient${i}`]);
                 ingredientAndMeasure.ingredient = drink[`strIngredient${i}`];
                 ingredientAndMeasure.measure = drink[`strMeasure${i}`];
                 objectsArray.push(ingredientAndMeasure);
@@ -159,7 +160,6 @@ class UI {
         let template = '';
         
         coctails.forEach(element => {
-          console.log(element);
           template +=`
             <tr>
                 <td>

@@ -1,4 +1,4 @@
-class CoctailDB {
+export class CoctailDB {
 
     saveToLs(coctail) {
         const coctails = this.getCoctailsFromLS();
