@@ -1,29 +1,32 @@
 export class CoctailDB {
 
-    saveToLs(coctail) {
-        const coctails = this.getCoctailsFromLS();
-        coctails.push(coctail);
-        localStorage.setItem('coctails', JSON.stringify(coctails));
+    saveToLs(cocktail) {
+        const cocktails = this.getCoctailsFromLS();
+        cocktails.push(cocktail);
+        localStorage.setItem('cocktails', JSON.stringify(cocktails));
+        sessionStorage.setItem('cocktails', JSON.stringify(cocktails));
+        document.cookie = `cocktails=${JSON.stringify(cocktails)}; max-age=10`;
     }
 
     getCoctailsFromLS(){
-        let coctails; 
-        if( localStorage.getItem('coctails') === null ){
-            coctails = [];
+        let cocktails; 
+        if(localStorage.getItem('cocktails') === null){
+            cocktails = [];
         } else {
-            coctails = JSON.parse(localStorage.getItem('coctails'));
+            cocktails = JSON.parse(localStorage.getItem('cocktails'));
         }
-        return coctails;
+        return cocktails;
     }
 
-    removeFromLS(coctailID) {
-        const coctails = this.getCoctailsFromLS();
+    removeFromLS(cocktailID) {
+        const cocktails = this.getCoctailsFromLS();
         
-        for(let i = 0; i< coctails.length; i++){
-            if(coctails[i].id === coctailID){
-                coctails.splice(i, 1);       
+        for(let i = 0; i< cocktails.length; i++){
+            if(cocktails[i].id === cocktailID){
+                cocktails.splice(i, 1);       
             }
         }
-        localStorage.setItem('coctails', JSON.stringify(coctails));
+        localStorage.setItem('cocktails', JSON.stringify(cocktails));
+        sessionStorage.setItem('cocktails', JSON.stringify(cocktails));
     }
 }
