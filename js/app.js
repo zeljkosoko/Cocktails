@@ -1,6 +1,6 @@
-import { UI } from "./ui.js";
-import { CoctailAPI } from "./cocktailAPI.js";
-import { CoctailDB } from "./cocktailDB.js";
+import { UI } from './ui.js';
+import { CoctailAPI } from './cocktailAPI.js';
+import { CoctailDB } from './cocktailDB.js';
 
 const ui = new UI(), cocktailAPI = new CoctailAPI(), cocktailDB = new CoctailDB();
 
