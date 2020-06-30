@@ -1,38 +1,44 @@
 export class CoctailAPI {
 
     async searchCocktailByName(name){
-        const apiResponse = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${name}`);
-        const jsonResponse = await apiResponse.json();
-        return jsonResponse;
+        this.apiResponse = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${name}`);
+        this.jsonResponse = await this.apiResponse.json();
+
+        return this.jsonResponse;
     }
 
     async getCocktailsByIngredient(ingredient){
-        const apiResponse = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${ingredient}`);
-        const jsonResponse = await apiResponse.json();
-        return jsonResponse;
+        this.apiResponse = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${ingredient}`);
+        this.jsonResponse = await this.apiResponse.json();
+
+        return this.jsonResponse;
     }
 
-    async getCocktailDetailsById(id) {
-        const apiResponse = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`);
-        const jsonResponse = await apiResponse.json();
-        return jsonResponse;
+    async getCocktailDetailsById(id){
+        this.apiResponse = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`);
+        this.jsonResponse = await this.apiResponse.json();
+
+        return this.jsonResponse;
     }
 
-    async getCocktailCategories() {
-        const apiResponse = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list`);
-        const jsonResponse = await apiResponse.json();
-        return jsonResponse;
+    async getCocktailCategories(){
+        this.apiResponse = await fetch('https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list');
+        this.jsonResponse = await this.apiResponse.json();
+
+        return this.jsonResponse;
     }
     
     async getCocktailsByCategory(category) {
-        const apiResponse = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${category}`);
-        const jsonResponse = await apiResponse.json();
-        return jsonResponse;
+        this.apiResponse = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${category}`);
+        this.jsonResponse = await this.apiResponse.json();
+
+        return this.jsonResponse;
     }
     
     async getCocktailsByAlcoholic(type) {
-        const apiResponse = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=${type}`);
-        const jsonResponse = await apiResponse.json();
-        return jsonResponse;
+        this.apiResponse = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=${type}`);
+        this.jsonResponse = await this.apiResponse.json();
+
+        return this.jsonResponse;
     }
 }

@@ -1,5 +1,5 @@
-var db;
-var dbRequest = indexedDB.open('FavoriteCocktails', 1);
+let db;
+const dbRequest = indexedDB.open('FavoriteCocktails', 1);
 
 dbRequest.onsuccess = function(event) {
     db = event.target.result;
@@ -8,14 +8,14 @@ dbRequest.onsuccess = function(event) {
 dbRequest.onupgradeneeded = function(event) {
     db = event.target.result;
 
-    const objStore = db.createObjectStore('cocktails', {keyPath: 'id'});
+    const objStore = db.createObjectStore('cocktails', { keyPath: 'id'});
 
     objStore.transaction.oncomplete = function() {
-        const favCocktails = db.transaction('cocktails','readwrite').objectStore('cocktails');
+        db.transaction('cocktails','readwrite').objectStore('cocktails');
     };
 };
 
-dbRequest.onerror = function(event){
+dbRequest.onerror = function(){
     console.log('ERROR');
 };
 
@@ -36,19 +36,20 @@ export class CoctailDB {
     }
 
     getCoctailsFromLS(){
-        let cocktails; 
+
         if(localStorage.getItem('cocktails') === null){
-            cocktails = [];
+            this.cocktails = [];
         } else {
-            cocktails = JSON.parse(localStorage.getItem('cocktails'));
+            this.cocktails = JSON.parse(localStorage.getItem('cocktails'));
         }
-        return cocktails;
+        
+        return this.cocktails;
     }
 
     removeFromLS(cocktailID) {
         const cocktails = this.getCoctailsFromLS();
         
-        for(let i = 0; i< cocktails.length; i++){
+        for(let i = 0; i < cocktails.length; i++){
             if(cocktails[i].id === cocktailID){
                 cocktails.splice(i, 1);       
             }

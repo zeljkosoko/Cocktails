@@ -1,0 +1,22 @@
+{
+  "name": "cocktails",
+  "version": "1.0.0",
+  "description": "cocktails browser that can storages only favorites",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zeljkosoko/Cocktails.git"
+  },
+  "author": "Zeljko Sokolovic",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zeljkosoko/Cocktails/issues"
+  },
+  "homepage": "https://github.com/zeljkosoko/Cocktails#readme",
+  "devDependencies": {
+    "eslint": "^7.3.1"
+  }
+}

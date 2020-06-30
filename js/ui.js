@@ -1,4 +1,4 @@
-import { CoctailDB } from "./cocktailDB.js";
+import { CoctailDB } from './cocktailDB.js';
 const cocktailDB = new CoctailDB();
 
 export class UI {
@@ -9,7 +9,6 @@ export class UI {
         const resultsRow = document.querySelector('#results');        
 
         drinks.forEach(drink => {
-
            resultsRow.innerHTML += `
             <div class="col-md-6 mt-5">
                 <div class="card">
@@ -49,7 +48,6 @@ export class UI {
         const resultsRow = document.querySelector('#results');
 
         drinks.forEach(drink => {
-
             resultsRow.innerHTML += ` 
                 <div class="col-md-4">
                     <div class="card my-3">
@@ -72,31 +70,32 @@ export class UI {
     }
 
     displayIngredientAndMeasureTemplate(drink){
-        let objectsArray = [];
+        this.objectsArray = [];
        
         for(let i = 1; i <= 15; i++){
             const ingredientAndMeasure = {};
-            if( drink[`strIngredient${i}`] !== null) {
+            if(drink[`strIngredient${i}`] !== null) {
                 ingredientAndMeasure.ingredient = drink[`strIngredient${i}`];
                 ingredientAndMeasure.measure = drink[`strMeasure${i}`];
-                objectsArray.push(ingredientAndMeasure);
+                this.objectsArray.push(ingredientAndMeasure);
             }
         }
         
-        let template = ``;
-        objectsArray.forEach(obj => {
+        let template = '';
+        this.objectsArray.forEach(obj => {
             template += `
                 <li class="list-group-item">${obj.ingredient}:${obj.measure}</li>
             `;
         });
+
         return template;
     }
 
     printMessage(message, className) {
-        const parentElement = document.querySelector('.jumbotron');
+        this.parentElement = document.querySelector('.jumbotron');
         const childElement = document.querySelector('.jumbotron h1');
 
-        var alertContainer = document.createElement("div");
+        const alertContainer = document.createElement('div');
         alertContainer.innerHTML = `
             <div class='alert alert-${className} alert-dismissable'>
                 <button class='close' data-dismiss='alert'>X</button>
@@ -104,7 +103,7 @@ export class UI {
             </div>
         `;
 
-        parentElement.insertBefore(alertContainer,childElement);
+        this.parentElement.insertBefore(alertContainer,childElement);
         
         setTimeout(() => {
             alertContainer.remove();
@@ -112,9 +111,9 @@ export class UI {
     }
 
     clearPrevious(){
-       const resultDiv = document.getElementById("results");
-        while(resultDiv.hasChildNodes()){
-            resultDiv.removeChild(resultDiv.firstChild);
+       this.resultDiv = document.getElementById('results');
+        while(this.resultDiv.hasChildNodes()){
+            this.resultDiv.removeChild(this.resultDiv.firstChild);
         }
     }
 
@@ -129,38 +128,37 @@ export class UI {
     }
 
     displayCategories(categories){
-        const categorySelect = document.querySelector('.search-category');
+        this.categorySelect = document.querySelector('.search-category');
 
-        let template = `<option>-SELECT-</option>`;
-        categories.forEach( category => {
-                category.strCategory = category.strCategory.split(" ").join("_");
+        let template = '<option>-SELECT-</option>';
+        categories.forEach(category => {
+                category.strCategory = category.strCategory.split(' ').join('_');
 
-               template += `
-               <option value="${category.strCategory}">${category.strCategory}</option>`;
+                template += `
+                    <option value="${category.strCategory}">${category.strCategory}</option>`;
         });
-        categorySelect.innerHTML = template;
+        this.categorySelect.innerHTML = template;
     }
 
-    isFavorite() {
-        const coctails = cocktailDB.getCoctailsFromLS();
+    isFavorite(){
+        this.coctails = cocktailDB.getCoctailsFromLS();
         
-        coctails.forEach( elem => {
-            let favBtn = document.querySelector(`[data-id="${elem.id}"]`);
+        this.coctails.forEach(elem => {
+            const favBtn = document.querySelector(`[data-id="${elem.id}"]`);
             
-            if(favBtn !== null ){
+            if(favBtn !== null){
                 favBtn.classList.add('.is-favorite');
                 favBtn.textContent = '-';
             }
-        });
-        
+        });    
     }
 
     displayFavorites(coctails) {
-        const favoritesElement = document.querySelector('#favorites > tbody');
+        this.favoritesElement = document.querySelector('#favorites > tbody');
         let template = '';
         
         coctails.forEach(element => {
-          template +=`
+          template += `
             <tr>
                 <td>
                     <img src="${element.image}" width=100 alt="${element.strDrink}">
@@ -179,7 +177,7 @@ export class UI {
           `;
         });
 
-        favoritesElement.innerHTML = template;
+        this.favoritesElement.innerHTML = template;
     }
 
     removeDOMelement(elem){
