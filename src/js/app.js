@@ -53,8 +53,7 @@ function getCocktails() {
                     ui.printMessage('There \'s no such cocktails','danger');
                 } else {
                     if(typeValue === 'name'){
-                        ui.displayTemplate(cocktails.drinks);
-                        
+                        ui.displayTemplate(cocktails.drinks); 
                     } else {
                         ui.displayTemplateIng(cocktails.drinks); 
                     } 
